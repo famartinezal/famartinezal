@@ -1,117 +1,101 @@
 ---
-const navLinks = [
-  { label: 'Acerca de mi', href: '#about' },
-  { label: 'Proyectos', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contacto', href: '#contact' },
+const links = [
+  { label: 'Sobre mí',  href: '#sobre-mi'  },
+  { label: 'Proyectos', href: '#proyectos'  },
+  { label: 'Skills',    href: '#skills'     },
+  { label: 'Contacto',  href: '#contacto'   },
 ];
 ---
 
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-6xl mx-auto px-6 lg:px-8">
-    <nav class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="#" class="group flex items-center gap-2 text-sm font-mono font-medium text-subtle hover:text-white transition-colors duration-200">
-        <span class="w-6 h-6 rounded-md bg-accent/20 border border-accent/30 flex items-center justify-center text-accent-light text-xs font-bold group-hover:bg-accent/30 transition-colors">
-          AR
-        </span>
-        <span class="hidden sm:inline">alex.dev</span>
-      </a>
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
-      <!-- Desktop links -->
-      <ul class="hidden md:flex items-center gap-1">
-        {navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="px-4 py-2 text-sm text-subtle hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 font-medium"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2.5 group">
+      <span class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white text-xs font-bold shrink-0">
+        FM
+      </span>
+      <span class="text-sm font-semibold text-mid group-hover:text-hi transition-colors hidden sm:block">
+        fredy.dev
+      </span>
+    </a>
 
-      <!-- CTA -->
-      <div class="flex items-center gap-3">
-        <span class="hidden sm:flex items-center gap-1.5 text-xs text-green-400 font-mono">
-          <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-          Available
-        </span>
+    <!-- Desktop links -->
+    <nav class="hidden md:flex items-center gap-1">
+      {links.map((l) => (
         <a
-          href="#contact"
-          class="text-sm font-medium px-4 py-2 rounded-lg bg-accent hover:bg-accent/90 text-white transition-all duration-200 glow-accent hover:glow-accent-strong"
+          href={l.href}
+          class="px-4 py-2 text-sm font-medium text-mid hover:text-hi rounded-lg hover:bg-card transition-all duration-200"
         >
-          Hire me
+          {l.label}
         </a>
-
-        <!-- Mobile menu button -->
-        <button
-          id="menu-toggle"
-          class="md:hidden p-2 rounded-lg text-subtle hover:text-white hover:bg-white/5 transition-all"
-          aria-label="Toggle menu"
-        >
-          <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+      ))}
     </nav>
+
+    <!-- CTA + toggle -->
+    <div class="flex items-center gap-3">
+      <a href="#contacto" class="btn-primary hidden sm:inline-flex py-2 px-4 text-sm">
+        Hablemos
+      </a>
+      <button
+        id="nav-toggle"
+        class="md:hidden p-2 rounded-lg text-mid hover:text-hi hover:bg-card transition-all"
+        aria-label="Menú"
+      >
+        <svg id="ico-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h10"/>
+        </svg>
+        <svg id="ico-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
   </div>
 
   <!-- Mobile menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden border-t border-border bg-surface-1/95 backdrop-blur-xl"
-  >
-    <ul class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class="block px-4 py-3 text-sm text-subtle hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 font-medium mobile-link"
-          >
-            {link.label}
-          </a>
-        </li>
+  <div id="mobile-nav" class="hidden md:hidden border-t border-border bg-bg">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class="mobile-link py-3 px-2 text-sm font-medium text-mid hover:text-hi border-b border-border last:border-0 transition-colors"
+        >
+          {l.label}
+        </a>
       ))}
-    </ul>
+      <a href="#contacto" class="btn-primary mt-3 justify-center mobile-link">Hablemos</a>
+    </div>
   </div>
 </header>
 
 <script>
-  const navbar = document.getElementById('navbar')!;
-  const menuToggle = document.getElementById('menu-toggle')!;
-  const mobileMenu = document.getElementById('mobile-menu')!;
-  const iconOpen = document.getElementById('icon-open')!;
-  const iconClose = document.getElementById('icon-close')!;
+  const nav    = document.getElementById('nav')!;
+  const toggle = document.getElementById('nav-toggle')!;
+  const menu   = document.getElementById('mobile-nav')!;
+  const open   = document.getElementById('ico-open')!;
+  const close  = document.getElementById('ico-close')!;
 
-  // Scroll effect
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
-      navbar.classList.add('bg-surface-1/90', 'backdrop-blur-xl', 'border-b', 'border-border');
+      nav.style.background = '#0b0b0f';
+      nav.style.borderBottom = '1px solid #242429';
     } else {
-      navbar.classList.remove('bg-surface-1/90', 'backdrop-blur-xl', 'border-b', 'border-border');
+      nav.style.background = 'transparent';
+      nav.style.borderBottom = 'none';
     }
+  }, { passive: true });
+
+  toggle.addEventListener('click', () => {
+    const hidden = menu.classList.toggle('hidden');
+    open.classList.toggle('hidden', !hidden);
+    close.classList.toggle('hidden', hidden);
   });
 
-  // Mobile toggle
-  menuToggle.addEventListener('click', () => {
-    const isOpen = !mobileMenu.classList.contains('hidden');
-    mobileMenu.classList.toggle('hidden');
-    iconOpen.classList.toggle('hidden', !isOpen);
-    iconClose.classList.toggle('hidden', isOpen);
-  });
-
-  // Close on link click
-  document.querySelectorAll('.mobile-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      iconOpen.classList.remove('hidden');
-      iconClose.classList.add('hidden');
-    });
-  });
+  document.querySelectorAll('.mobile-link').forEach((l) =>
+    l.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      open.classList.remove('hidden');
+      close.classList.add('hidden');
+    })
+  );
 </script>

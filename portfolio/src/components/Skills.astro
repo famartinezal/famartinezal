@@ -1,55 +1,42 @@
 ---
 import { skills } from '../data/portfolio';
 
-const categories = [
-  {
-    label: 'Frontend',
-    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-2"/></svg>`,
-    items: skills.frontend,
-    accent: 'from-violet-500/20 to-purple-500/10 border-violet-500/20',
-    tag: 'bg-violet-500/10 border-violet-500/20 text-violet-300',
-  },
-  {
-    label: 'Backend',
-    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>`,
-    items: skills.backend,
-    accent: 'from-blue-500/20 to-cyan-500/10 border-blue-500/20',
-    tag: 'bg-blue-500/10 border-blue-500/20 text-blue-300',
-  },
-  {
-    label: 'Tools & Platforms',
-    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
-    items: skills.tools,
-    accent: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/20',
-    tag: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300',
-  },
+const cats = [
+  { label: 'Ciencia de datos', items: skills.cienciaDatos,  accent: 'rgba(59,130,246,0.08)',  border: 'rgba(59,130,246,0.2)' },
+  { label: 'Teledetección',    items: skills.teledeteccion, accent: 'rgba(16,185,129,0.08)',  border: 'rgba(16,185,129,0.2)' },
+  { label: 'Desarrollo',       items: skills.desarrollo,    accent: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.2)' },
 ];
 ---
 
 <section id="skills" class="py-28 lg:py-36">
-  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto px-6">
 
-    <!-- Section header -->
-    <div class="mb-16" data-reveal>
-      <p class="text-xs font-mono text-accent-light uppercase tracking-[0.2em] mb-3">03 — Skills</p>
-      <h2 class="text-3xl sm:text-4xl font-bold text-white">Technologies I use</h2>
-    </div>
+    <p class="label mb-3" data-reveal>03 — Skills</p>
+    <h2
+      class="text-3xl sm:text-4xl font-bold tracking-tight mb-14 leading-tight"
+      style="color: var(--hi);"
+      data-reveal data-reveal-d1
+    >
+      Tecnologías que uso
+    </h2>
 
-    <!-- Skills grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {categories.map((cat, index) => (
+    <div class="grid sm:grid-cols-3 gap-4" data-reveal data-reveal-d2>
+      {cats.map((cat, i) => (
         <div
-          class={`p-6 rounded-2xl bg-gradient-to-br ${cat.accent} border backdrop-blur-sm`}
-          data-reveal
-          data-reveal-delay={String(index + 1)}
+          class="rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1"
+          style={`background: var(--card); border: 1px solid var(--border); transition-delay: ${i * 80}ms;`}
         >
-          <div class="flex items-center gap-2 mb-5">
-            <span class="text-subtle" set:html={cat.icon}></span>
-            <h3 class="text-sm font-semibold text-white">{cat.label}</h3>
+          <!-- Colored dot accent -->
+          <div class="flex items-center gap-2 mb-6">
+            <span class="w-2 h-2 rounded-full shrink-0" style={`background: ${cat.border.replace('0.2', '1')};`}></span>
+            <p class="label">{cat.label}</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            {cat.items.map((skill) => (
-              <span class={`px-3 py-1 rounded-lg border text-xs font-mono font-medium ${cat.tag} transition-all duration-200 hover:scale-105 cursor-default`}>
+            {cat.items.map((skill, j) => (
+              <span
+                class="tag"
+                style={`transition-delay: ${j * 30}ms;`}
+              >
                 {skill}
               </span>
             ))}
@@ -58,16 +45,26 @@ const categories = [
       ))}
     </div>
 
-    <!-- Currently learning -->
-    <div class="mt-8 p-6 rounded-2xl bg-surface-1 border border-border flex flex-col sm:flex-row sm:items-center gap-4" data-reveal data-reveal-delay="4">
-      <div class="shrink-0 w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent-light">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+    <!-- Currently learning strip -->
+    <div
+      class="mt-4 flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-2xl"
+      style="background: var(--card); border: 1px solid var(--border);"
+      data-reveal data-reveal-d3
+    >
+      <div
+        class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+        style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);"
+      >
+        <svg class="w-4 h-4" style="color: var(--accent-l);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
         </svg>
       </div>
       <div>
-        <p class="text-sm font-medium text-white mb-0.5">Currently exploring</p>
-        <p class="text-sm text-subtle">Rust for WebAssembly · LLM tooling & RAG pipelines · Edge computing with Cloudflare Workers</p>
+        <p class="text-sm font-semibold mb-0.5" style="color: var(--hi);">Explorando ahora</p>
+        <p class="text-sm" style="color: var(--mid);">
+          Deep Learning para imágenes satelitales · Rust · Infraestructura cloud para datos geoespaciales
+        </p>
       </div>
     </div>
   </div>

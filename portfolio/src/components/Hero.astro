@@ -2,91 +2,111 @@
 import { personal } from '../data/portfolio';
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-  <!-- Background orbs -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-violet-600/5 blur-[80px] pointer-events-none" aria-hidden="true"></div>
+<section id="hero" class="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden">
 
-  <div class="max-w-6xl mx-auto px-6 lg:px-8 py-24 w-full">
-    <div class="max-w-4xl">
-      <!-- Status badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-2 border border-border text-xs font-mono text-subtle mb-8 animate-fade-in">
-        <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-        <span>Open to full-time & freelance roles</span>
-      </div>
+  <!-- Aurora background blobs -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="aurora absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full"
+         style="background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 65%);"></div>
+    <div class="aurora absolute top-1/3 -left-32 w-[500px] h-[500px] rounded-full"
+         style="background: radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 65%); animation-delay:-4s;"></div>
+    <div class="aurora absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full"
+         style="background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%); animation-delay:-8s;"></div>
+  </div>
 
-      <!-- Headline -->
-      <h1 class="text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tight leading-[1.05] mb-6">
-        <span class="block text-white animate-fade-up" style="animation-delay: 0.1s; animation-fill-mode: both;">
-          Hi, I'm
-        </span>
-        <span class="block text-gradient animate-fade-up" style="animation-delay: 0.2s; animation-fill-mode: both;">
-          {personal.name}
-        </span>
-      </h1>
+  <!-- Dot grid texture -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0"
+       style="background-image: radial-gradient(circle, #27272f 1px, transparent 1px); background-size: 28px 28px; opacity: 0.5;"></div>
 
-      <!-- Role with typewriter cursor -->
-      <p class="text-xl sm:text-2xl lg:text-3xl font-light text-subtle mb-6 animate-fade-up" style="animation-delay: 0.3s; animation-fill-mode: both;">
-        {personal.role}
-        <span class="inline-block w-0.5 h-7 bg-accent-light ml-1 animate-cursor-blink align-middle"></span>
-      </p>
+  <div class="relative max-w-6xl mx-auto px-6 w-full py-24">
 
-      <!-- Tagline -->
-      <p class="text-base sm:text-lg text-muted max-w-2xl mb-10 leading-relaxed animate-fade-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
-        {personal.tagline}
-      </p>
+    <!-- Status badge -->
+    <div
+      class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-mid mb-10"
+      style="animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;"
+    >
+      <span class="w-2 h-2 rounded-full bg-green shrink-0"
+            style="animation: glowPulse 2s ease-in-out infinite;"></span>
+      Disponible para proyectos · Colombia
+    </div>
 
-      <!-- CTAs -->
-      <div class="flex flex-wrap items-center gap-4 animate-fade-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
-        <a
-          href="#projects"
-          class="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent hover:bg-violet-500 text-white font-semibold text-sm transition-all duration-200 glow-accent hover:glow-accent-strong hover:-translate-y-0.5"
-        >
-          View projects
-          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
-        <a
-          href="#contact"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-2 hover:bg-surface-3 border border-border hover:border-border-hover text-white font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5"
-        >
-          Get in touch
-        </a>
-        <a
-          href={personal.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-subtle hover:text-white transition-colors duration-200 text-sm"
-        >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-          GitHub
-        </a>
-      </div>
+    <!-- Headline con shimmer animado -->
+    <h1
+      class="text-5xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-none mb-5 text-grad-animated"
+      style="animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.08s both;"
+    >
+      {personal.name}
+    </h1>
 
-      <!-- Social proof / stats -->
-      <div class="flex flex-wrap gap-8 mt-16 pt-10 border-t border-border animate-fade-up" style="animation-delay: 0.6s; animation-fill-mode: both;">
-        {[
-          { value: '5+', label: 'Years experience' },
-          { value: '30+', label: 'Projects shipped' },
-          { value: '15+', label: 'Happy clients' },
-        ].map((stat) => (
-          <div>
-            <p class="text-2xl font-bold text-white">{stat.value}</p>
-            <p class="text-xs text-muted mt-0.5 font-medium uppercase tracking-wider">{stat.label}</p>
-          </div>
-        ))}
-      </div>
+    <!-- Role -->
+    <p
+      class="text-xl sm:text-2xl lg:text-3xl font-light mb-5 tracking-tight"
+      style="color: var(--mid); animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.16s both;"
+    >
+      {personal.role}
+      <span class="inline-block w-0.5 h-7 ml-1 cursor-blink align-middle rounded-full"
+            style="background: var(--accent);"></span>
+    </p>
+
+    <!-- Tagline -->
+    <p
+      class="text-base sm:text-lg max-w-xl leading-relaxed mb-12"
+      style="color: var(--lo); animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.24s both;"
+    >
+      {personal.tagline}
+    </p>
+
+    <!-- CTAs -->
+    <div
+      class="flex flex-wrap gap-3"
+      style="animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.32s both;"
+    >
+      <a href="#proyectos" class="btn-primary">
+        Ver proyectos
+        <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+      <a href="#contacto" class="btn-ghost">Contactar</a>
+      <a
+        href={personal.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm transition-colors duration-200"
+        style="color: var(--lo);"
+        onmouseover="this.style.color='var(--hi)'"
+        onmouseout="this.style.color='var(--lo)'"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+
+    <!-- Stats con contador animado -->
+    <div
+      class="mt-16 pt-10 border-t flex flex-wrap gap-12"
+      style="border-color: var(--border); animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.40s both;"
+    >
+      {[
+        { count: 5,   suffix: '+', label: 'Años de experiencia'      },
+        { count: 20,  suffix: '+', label: 'Proyectos entregados'      },
+        { count: 100, suffix: 'k+', label: 'Ha de cultivos analizadas'},
+      ].map((s) => (
+        <div>
+          <p class="text-3xl font-black" style="color: var(--hi);">
+            <span data-count={s.count} data-suffix={s.suffix}>0{s.suffix}</span>
+          </p>
+          <p class="label mt-1">{s.label}</p>
+        </div>
+      ))}
     </div>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted animate-float" aria-hidden="true">
-    <span class="text-xs font-mono uppercase tracking-widest">scroll</span>
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 float" aria-hidden="true">
+    <span class="label" style="font-size:0.6rem;">scroll</span>
+    <div class="w-px h-10" style="background: linear-gradient(to bottom, var(--lo), transparent);"></div>
   </div>
 </section>
