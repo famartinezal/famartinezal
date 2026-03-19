@@ -6,7 +6,7 @@ export interface Props {
 }
 
 const {
-  title = 'Alex Rivera — Full Stack Developer',
+  title = 'Fredy Martínez — Full Stack Developer',
   description = 'Full Stack Developer specializing in React, Node.js, and modern web architecture. Open to new opportunities.',
   image = '/portfolio/og-image.png',
 } = Astro.props;
@@ -15,7 +15,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="es" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,7 +25,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content="Alex Rivera" />
+    <meta name="author" content="Fredy Martínez" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
