@@ -1,0 +1,133 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Alex Rivera — Full Stack Developer',
+  description = 'Full Stack Developer specializing in React, Node.js, and modern web architecture. Open to new opportunities.',
+  image = '/portfolio/og-image.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Alex Rivera" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+  </head>
+  <body class="bg-surface text-white font-sans antialiased selection:bg-accent/30 selection:text-accent-light">
+    <!-- Ambient background mesh -->
+    <div class="fixed inset-0 bg-gradient-mesh pointer-events-none -z-10 opacity-60" aria-hidden="true"></div>
+    <!-- Noise texture overlay -->
+    <div class="fixed inset-0 pointer-events-none -z-10 opacity-[0.03]"
+         style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E');"
+         aria-hidden="true">
+    </div>
+
+    <slot />
+
+    <!-- Scroll reveal script -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+      );
+
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+
+    <style is:global>
+      /* Scroll reveal base states */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      [data-reveal-delay='1'] { transition-delay: 0.1s; }
+      [data-reveal-delay='2'] { transition-delay: 0.2s; }
+      [data-reveal-delay='3'] { transition-delay: 0.3s; }
+      [data-reveal-delay='4'] { transition-delay: 0.4s; }
+      [data-reveal-delay='5'] { transition-delay: 0.5s; }
+      [data-reveal-delay='6'] { transition-delay: 0.6s; }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: #0d0d0f; }
+      ::-webkit-scrollbar-thumb { background: #26262f; border-radius: 999px; }
+      ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+
+      /* Gradient text utility */
+      .text-gradient {
+        background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #c4b5fd 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .text-gradient-subtle {
+        background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Glow effects */
+      .glow-accent {
+        box-shadow: 0 0 0 1px rgba(124,58,237,0.3), 0 4px 24px rgba(124,58,237,0.15);
+      }
+      .glow-accent-strong {
+        box-shadow: 0 0 0 1px rgba(124,58,237,0.5), 0 8px 40px rgba(124,58,237,0.3);
+      }
+    </style>
+  </body>
+</html>
