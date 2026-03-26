@@ -1,6 +1,5 @@
 ---
 import { personal } from '../data/portfolio';
-
 const socials = [
   {
     label: 'GitHub', sub: '@famartinezal', href: personal.github,
@@ -13,44 +12,50 @@ const socials = [
 ];
 ---
 
-<section id="contacto" class="py-28 lg:py-36">
-  <div class="max-w-6xl mx-auto px-6">
+<!-- Contacto: vuelve a background — alternancia de capas -->
+<section id="contacto" class="surface">
+  <div class="max-w-6xl mx-auto px-8 py-36 lg:py-44">
 
-    <p class="label mb-3" data-reveal>04 — Contacto</p>
-    <div class="max-w-2xl mb-14" data-reveal data-reveal-d1>
-      <h2 class="text-4xl sm:text-5xl font-black tracking-tight leading-tight mb-5" style="color: var(--hi);">
-        ¿Tienes un proyecto<br/>en mente?
+    <p class="t-label mb-5" data-reveal>04 — Contacto</p>
+
+    <!-- Headline display grande — "Asymmetric Air" en la columna derecha -->
+    <div class="max-w-xl mb-20" data-reveal data-reveal-d1>
+      <h2
+        class="t-display mb-6"
+        style="font-size: clamp(2.5rem, 7vw, 4.5rem);"
+      >
+        ¿Tienes un<br/>
+        <span class="text-emerald">proyecto</span><br/>
+        en mente?
       </h2>
-      <p class="leading-relaxed" style="color: var(--mid);">
+      <p class="t-body text-base">
         Disponible para colaboraciones, proyectos freelance o posiciones full-time.
         Si trabajas con datos geoespaciales o necesitas un developer serio, hablemos.
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-10 items-start">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
 
-      <!-- Left -->
-      <div class="space-y-3" data-reveal data-reveal-d2>
+      <!-- Izquierda: email + socials -->
+      <div class="flex flex-col gap-3" data-reveal data-reveal-d2>
 
-        <!-- Email card -->
-        <div class="card flex items-center justify-between gap-4 p-5">
+        <!-- Email — card surface_mid, sin borde rígido -->
+        <div class="surface-mid rounded-2xl p-5 flex items-center justify-between gap-4">
           <div>
-            <p class="label mb-1">Email directo</p>
-            <p class="text-base font-mono font-semibold" style="color: var(--hi);">{personal.email}</p>
+            <p class="t-label mb-1.5" style="font-size: 0.6rem;">Email directo</p>
+            <p class="font-mono font-bold" style="color: var(--on-surface); font-size: 0.9rem;">{personal.email}</p>
           </div>
           <button
             id="copy-btn"
             data-email={personal.email}
-            class="shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium transition-all duration-200"
-            style="background: var(--bg); border: 1px solid var(--border); color: var(--mid);"
+            class="btn-secondary py-2 px-4 text-xs shrink-0"
             aria-label="Copiar email"
           >
             <svg id="ico-copy" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
             </svg>
-            <svg id="ico-ok" class="w-3.5 h-3.5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 style="color: var(--green);">
+            <svg id="ico-ok" class="w-3.5 h-3.5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
             <span id="copy-lbl">Copiar</span>
@@ -62,53 +67,61 @@ const socials = [
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="card card-glow flex items-center gap-4 p-5 group"
+            class="card surface-mid flex items-center gap-4 p-5 group rounded-2xl"
           >
-            <span class="transition-colors duration-200 group-hover:text-white"
-                  style="color: var(--lo);" set:html={s.icon}></span>
+            <span
+              class="transition-all duration-200 group-hover:icon-glow"
+              style="color: var(--on-surface-variant);"
+              set:html={s.icon}
+            ></span>
             <div class="flex-1">
-              <p class="text-sm font-semibold" style="color: var(--hi);">{s.label}</p>
-              <p class="text-xs font-mono" style="color: var(--lo);">{s.sub}</p>
+              <p class="font-semibold text-sm" style="color: var(--on-surface);">{s.label}</p>
+              <p class="font-mono text-xs" style="color: var(--on-surface-variant);">{s.sub}</p>
             </div>
-            <svg class="w-4 h-4 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                 style="color: var(--lo);"
-                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              class="w-4 h-4 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              style="color: var(--on-surface-variant);"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
             </svg>
           </a>
         ))}
       </div>
 
-      <!-- Right: form -->
+      <!-- Derecha: form — inputs con surface_low y ghost border en focus (design.md) -->
       <form
         action={`mailto:${personal.email}`}
         method="GET"
-        class="space-y-4"
+        class="flex flex-col gap-4"
         data-reveal data-reveal-d3
       >
         <div class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label class="label block mb-2" for="f-name">Nombre</label>
+            <!-- Labels flotando sobre el input (design.md) -->
+            <label class="t-label block mb-2" style="font-size:0.6rem;" for="f-name">Nombre</label>
             <input id="f-name" type="text" name="name" required placeholder="Tu nombre" class="input"/>
           </div>
           <div>
-            <label class="label block mb-2" for="f-email">Email</label>
+            <label class="t-label block mb-2" style="font-size:0.6rem;" for="f-email">Email</label>
             <input id="f-email" type="email" name="email" required placeholder="tu@email.com" class="input"/>
           </div>
         </div>
         <div>
-          <label class="label block mb-2" for="f-msg">Mensaje</label>
+          <label class="t-label block mb-2" style="font-size:0.6rem;" for="f-msg">Mensaje</label>
           <textarea id="f-msg" name="body" rows={5} required
                     placeholder="Cuéntame sobre tu proyecto..." class="input resize-none"></textarea>
         </div>
-        <button type="submit" class="btn-primary w-full justify-center">
+
+        <button type="submit" class="btn-primary w-full justify-center mt-2">
           Enviar mensaje
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
           </svg>
         </button>
-        <p class="text-xs text-center font-mono" style="color: var(--lo);">
+
+        <p class="text-center font-mono text-xs" style="color: var(--on-surface-variant); opacity: 0.6;">
           Abre tu cliente de correo · Respondo en &lt; 24 h
         </p>
       </form>
@@ -121,17 +134,14 @@ const socials = [
   const icoCopy = document.getElementById('ico-copy');
   const icoOk   = document.getElementById('ico-ok');
   const lbl     = document.getElementById('copy-lbl');
-
   btn?.addEventListener('click', () => {
     navigator.clipboard.writeText(btn.dataset.email ?? '').then(() => {
       icoCopy?.classList.add('hidden');
       icoOk?.classList.remove('hidden');
-      btn.style.borderColor = 'var(--green)';
       if (lbl) lbl.textContent = '¡Copiado!';
       setTimeout(() => {
         icoCopy?.classList.remove('hidden');
         icoOk?.classList.add('hidden');
-        btn.style.borderColor = 'var(--border)';
         if (lbl) lbl.textContent = 'Copiar';
       }, 2000);
     });

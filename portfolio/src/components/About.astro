@@ -2,77 +2,98 @@
 import { personal, experience } from '../data/portfolio';
 ---
 
-<section id="sobre-mi" class="py-28 lg:py-36">
-  <div class="max-w-6xl mx-auto px-6">
+<!-- Sección About: fondo surface_container_low — shift tonal sin borde (design.md) -->
+<section id="sobre-mi" class="surface-low">
+  <div class="max-w-6xl mx-auto px-8 py-36 lg:py-44">
 
-    <p class="label mb-3" data-reveal>01 — Sobre mí</p>
+    <!-- Overline label — primary color -->
+    <p class="t-label mb-5" data-reveal>01 — Sobre mí</p>
+
+    <!-- Headline: font-weight 700, letra apretada, margen generoso superior (design.md) -->
     <h2
-      class="text-3xl sm:text-4xl font-bold tracking-tight mb-16 leading-tight"
-      style="color: var(--hi);"
+      class="t-headline mb-20 leading-tight"
+      style="font-size: clamp(2rem, 5vw, 3.25rem);"
       data-reveal data-reveal-d1
     >
       Datos que cuentan historias.<br/>
-      <span class="text-grad-blue">Código que escala.</span>
+      <span class="text-emerald">Código que escala.</span>
     </h2>
 
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+    <!-- "Asymmetric Air": columna izq más estrecha, columna der más ancha y aireada -->
+    <div class="grid lg:grid-cols-[5fr_4fr] gap-16 lg:gap-28 items-start">
 
-      <!-- Bio + focus cards -->
+      <!-- Izquierda: Bio + focus items -->
       <div data-reveal data-reveal-d2>
-        <p class="leading-relaxed text-base mb-8" style="color: var(--mid);">{personal.bio}</p>
+        <!-- Body con on_surface_variant (design.md) -->
+        <p class="t-body text-base mb-10">{personal.bio}</p>
 
-        <div class="space-y-3">
+        <!-- Focus items — cards surface_container, sin divisores internos -->
+        <div class="flex flex-col gap-3">
           {[
-            { icon: '◈', title: 'Teledetección SAR',
+            { title: 'Teledetección SAR',
               desc: 'Procesamiento de imágenes Sentinel-1 para monitoreo agrícola a escala nacional.' },
-            { icon: '◈', title: 'Machine Learning',
+            { title: 'Machine Learning',
               desc: 'Clasificación de cultivos, detección de fenología y análisis de series de tiempo.' },
-            { icon: '◈', title: 'Desarrollo de software',
+            { title: 'Desarrollo de software',
               desc: 'APIs, dashboards y pipelines de datos geoespaciales listos para producción.' },
           ].map((item) => (
-            <div class="card card-glow flex gap-4 p-4 group cursor-default">
-              <span class="font-mono mt-0.5 shrink-0 transition-colors duration-200 group-hover:text-accent-l"
-                    style="color: var(--accent);">{item.icon}</span>
-              <div>
-                <p class="text-sm font-semibold mb-0.5 transition-colors duration-200 group-hover:text-white"
-                   style="color: var(--hi);">{item.title}</p>
-                <p class="text-sm" style="color: var(--mid);">{item.desc}</p>
-              </div>
+            <div class="card card-glow p-5 group cursor-default">
+              <p
+                class="t-label mb-2 group-hover:opacity-100 transition-opacity"
+                style="color: var(--primary);"
+              >
+                {item.title}
+              </p>
+              <p class="t-body text-sm">{item.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <!-- Experience timeline -->
-      <div data-reveal data-reveal-d3>
-        <p class="label mb-8">Experiencia</p>
+      <!-- Derecha: Timeline — más aire alrededor por el "Asymmetric Air" -->
+      <div class="lg:pt-2" data-reveal data-reveal-d3>
+        <p class="t-label mb-10">Experiencia</p>
+
         <ol class="space-y-0">
           {experience.map((job, i) => (
-            <li class="flex gap-5 pb-10 last:pb-0 group">
-              <div class="flex flex-col items-center pt-1.5 shrink-0">
+            <li class="flex gap-5 pb-12 last:pb-0 group">
+              <!-- Timeline connector — color tonal, no línea visible -->
+              <div class="flex flex-col items-center pt-1 shrink-0">
                 <div
                   class="w-2.5 h-2.5 rounded-full shrink-0 dot-pulse transition-transform duration-200 group-hover:scale-125"
-                  style="background: var(--accent);"
+                  style="background: var(--primary);"
                 ></div>
                 {i < experience.length - 1 && (
-                  <div class="flex-1 w-px mt-2 min-h-[32px]" style="background: var(--border);"></div>
+                  <div
+                    class="flex-1 w-px mt-3 min-h-[36px]"
+                    style="background: linear-gradient(to bottom, var(--primary-c), transparent);"
+                  ></div>
                 )}
               </div>
+
               <div>
-                <p class="label mb-1">{job.period}</p>
-                <p class="text-base font-semibold mb-0.5 transition-colors duration-200 group-hover:text-white"
-                   style="color: var(--hi);">{job.org}</p>
-                <p class="text-sm font-medium mb-2" style="color: var(--accent-l);">{job.role}</p>
-                <p class="text-sm leading-relaxed" style="color: var(--mid);">{job.desc}</p>
+                <p class="t-label mb-1" style="font-size:0.6rem;">{job.period}</p>
+                <p
+                  class="font-bold mb-0.5 transition-colors duration-200 group-hover:text-white"
+                  style="color: var(--on-surface); font-size: 0.95rem;"
+                >{job.org}</p>
+                <p class="text-sm font-medium mb-2 text-emerald" style="font-size:0.8rem;">{job.role}</p>
+                <p class="t-body text-sm">{job.desc}</p>
               </div>
             </li>
           ))}
         </ol>
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mt-2"
-             style="background: var(--card); border: 1px solid var(--border);">
-          <span class="w-1.5 h-1.5 rounded-full shrink-0"
-                style="background: var(--green); animation: glowPulse 2s ease-in-out infinite;"></span>
-          <span class="text-xs font-mono" style="color: var(--mid);">{personal.location}</span>
+
+        <!-- Location badge — surface_container, sin borde rígido -->
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mt-4"
+          style="background: var(--s-mid);"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full shrink-0"
+            style="background: var(--primary); animation: glowPulse 2s ease-in-out infinite;"
+          ></span>
+          <span class="text-xs font-mono" style="color: var(--on-surface-variant);">{personal.location}</span>
         </div>
       </div>
     </div>

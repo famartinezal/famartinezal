@@ -1,68 +1,58 @@
 ---
 import { skills } from '../data/portfolio';
-
 const cats = [
-  { label: 'Ciencia de datos', items: skills.cienciaDatos,  accent: 'rgba(59,130,246,0.08)',  border: 'rgba(59,130,246,0.2)' },
-  { label: 'Teledetección',    items: skills.teledeteccion, accent: 'rgba(16,185,129,0.08)',  border: 'rgba(16,185,129,0.2)' },
-  { label: 'Desarrollo',       items: skills.desarrollo,    accent: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.2)' },
+  { label: 'Ciencia de datos', items: skills.cienciaDatos },
+  { label: 'Teledetección',    items: skills.teledeteccion },
+  { label: 'Desarrollo',       items: skills.desarrollo    },
 ];
 ---
 
-<section id="skills" class="py-28 lg:py-36">
-  <div class="max-w-6xl mx-auto px-6">
+<!-- Skills: surface_low — alterna con sección anterior (background) -->
+<section id="skills" class="surface-low">
+  <div class="max-w-6xl mx-auto px-8 py-36 lg:py-44">
 
-    <p class="label mb-3" data-reveal>03 — Skills</p>
+    <p class="t-label mb-5" data-reveal>03 — Skills</p>
     <h2
-      class="text-3xl sm:text-4xl font-bold tracking-tight mb-14 leading-tight"
-      style="color: var(--hi);"
+      class="t-headline mb-20"
+      style="font-size: clamp(2rem, 5vw, 3.25rem);"
       data-reveal data-reveal-d1
     >
       Tecnologías que uso
     </h2>
 
-    <div class="grid sm:grid-cols-3 gap-4" data-reveal data-reveal-d2>
+    <!-- Tres columnas: separación solo por tono (surface_mid) — sin divisores 1px -->
+    <div class="grid sm:grid-cols-3 gap-4 mb-4" data-reveal data-reveal-d2>
       {cats.map((cat, i) => (
         <div
-          class="rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1"
-          style={`background: var(--card); border: 1px solid var(--border); transition-delay: ${i * 80}ms;`}
+          class="surface-mid rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1"
+          style={`transition-delay: ${i * 80}ms;`}
         >
-          <!-- Colored dot accent -->
-          <div class="flex items-center gap-2 mb-6">
-            <span class="w-2 h-2 rounded-full shrink-0" style={`background: ${cat.border.replace('0.2', '1')};`}></span>
-            <p class="label">{cat.label}</p>
-          </div>
+          <p class="t-label mb-6">{cat.label}</p>
           <div class="flex flex-wrap gap-2">
-            {cat.items.map((skill, j) => (
-              <span
-                class="tag"
-                style={`transition-delay: ${j * 30}ms;`}
-              >
-                {skill}
-              </span>
+            {cat.items.map((skill) => (
+              <span class="tag">{skill}</span>
             ))}
           </div>
         </div>
       ))}
     </div>
 
-    <!-- Currently learning strip -->
+    <!-- Explorando ahora — surface_container_high, shift más elevado -->
     <div
-      class="mt-4 flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-2xl"
-      style="background: var(--card); border: 1px solid var(--border);"
+      class="surface-high rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center gap-5"
       data-reveal data-reveal-d3
     >
-      <div
-        class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-        style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);"
-      >
-        <svg class="w-4 h-4" style="color: var(--accent-l);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <!-- Signature glow en el ícono (design.md) -->
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+           style="background: rgba(105,246,184,0.1);">
+        <svg class="w-5 h-5 icon-glow" style="color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
         </svg>
       </div>
       <div>
-        <p class="text-sm font-semibold mb-0.5" style="color: var(--hi);">Explorando ahora</p>
-        <p class="text-sm" style="color: var(--mid);">
+        <p class="font-bold mb-1" style="color: var(--on-surface); font-size: 0.875rem;">Explorando ahora</p>
+        <p class="t-body text-sm">
           Deep Learning para imágenes satelitales · Rust · Infraestructura cloud para datos geoespaciales
         </p>
       </div>

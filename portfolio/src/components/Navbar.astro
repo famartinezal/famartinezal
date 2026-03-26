@@ -1,4 +1,8 @@
 ---
+/* design.md — El Dock Flotante
+   Desktop: dock centrado en la parte INFERIOR con glassmorphism.
+   Mobile: header simple en la parte superior con hamburguesa.
+*/
 const links = [
   { label: 'Sobre mí',  href: '#sobre-mi'  },
   { label: 'Proyectos', href: '#proyectos'  },
@@ -7,95 +11,133 @@ const links = [
 ];
 ---
 
-<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
-  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+<!-- ── DESKTOP DOCK (bottom center) ───────────────────── -->
+<nav
+  id="dock"
+  class="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 z-50 items-center gap-1 px-3 py-2.5 rounded-2xl glass"
+  style="animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s both;"
+  aria-label="Navegación principal"
+>
+  <!-- Logo mark -->
+  <a href="#" class="flex items-center gap-2 px-3 py-1.5 rounded-xl group mr-1">
+    <span
+      class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 icon-glow"
+      style="background: linear-gradient(135deg,var(--primary),var(--primary-c)); color:#0a0f0d;"
+    >FM</span>
+  </a>
 
-    <!-- Logo -->
-    <a href="#" class="flex items-center gap-2.5 group">
-      <span class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white text-xs font-bold shrink-0">
-        FM
-      </span>
-      <span class="text-sm font-semibold text-mid group-hover:text-hi transition-colors hidden sm:block">
-        fredy.dev
-      </span>
+  <!-- Divider tonal — sin línea real -->
+  <div class="w-px h-4 mx-1" style="background: var(--outline-v);"></div>
+
+  {links.map((l) => (
+    <a
+      href={l.href}
+      class="dock-link px-4 py-1.5 rounded-xl text-sm font-medium transition-all duration-200"
+      style="color: var(--on-surface-variant);"
+    >
+      {l.label}
     </a>
+  ))}
 
-    <!-- Desktop links -->
-    <nav class="hidden md:flex items-center gap-1">
-      {links.map((l) => (
-        <a
-          href={l.href}
-          class="px-4 py-2 text-sm font-medium text-mid hover:text-hi rounded-lg hover:bg-card transition-all duration-200"
-        >
-          {l.label}
-        </a>
-      ))}
-    </nav>
+  <!-- Divider tonal -->
+  <div class="w-px h-4 mx-1" style="background: var(--outline-v);"></div>
 
-    <!-- CTA + toggle -->
-    <div class="flex items-center gap-3">
-      <a href="#contacto" class="btn-primary hidden sm:inline-flex py-2 px-4 text-sm">
-        Hablemos
-      </a>
-      <button
-        id="nav-toggle"
-        class="md:hidden p-2 rounded-lg text-mid hover:text-hi hover:bg-card transition-all"
-        aria-label="Menú"
-      >
-        <svg id="ico-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h10"/>
-        </svg>
-        <svg id="ico-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-    </div>
-  </div>
+  <a href="#contacto" class="btn-primary py-1.5 px-4 text-sm">
+    Hablemos
+  </a>
+</nav>
 
-  <!-- Mobile menu -->
-  <div id="mobile-nav" class="hidden md:hidden border-t border-border bg-bg">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
-      {links.map((l) => (
-        <a
-          href={l.href}
-          class="mobile-link py-3 px-2 text-sm font-medium text-mid hover:text-hi border-b border-border last:border-0 transition-colors"
-        >
-          {l.label}
-        </a>
-      ))}
-      <a href="#contacto" class="btn-primary mt-3 justify-center mobile-link">Hablemos</a>
-    </div>
-  </div>
+<!-- ── MOBILE HEADER (top) ────────────────────────────── -->
+<header
+  id="mobile-header"
+  class="md:hidden fixed top-0 inset-x-0 z-50 flex items-center justify-between px-5 h-14 transition-all duration-300"
+>
+  <a href="#" class="flex items-center gap-2">
+    <span
+      class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold icon-glow"
+      style="background: linear-gradient(135deg,var(--primary),var(--primary-c)); color:#0a0f0d;"
+    >FM</span>
+    <span class="text-sm font-semibold" style="color: var(--on-surface-variant);">fredy.dev</span>
+  </a>
+  <button
+    id="mob-toggle"
+    class="p-2 rounded-xl transition-colors"
+    style="color: var(--on-surface-variant);"
+    aria-label="Abrir menú"
+  >
+    <svg id="mob-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h10"/>
+    </svg>
+    <svg id="mob-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
 </header>
 
-<script>
-  const nav    = document.getElementById('nav')!;
-  const toggle = document.getElementById('nav-toggle')!;
-  const menu   = document.getElementById('mobile-nav')!;
-  const open   = document.getElementById('ico-open')!;
-  const close  = document.getElementById('ico-close')!;
+<!-- ── MOBILE DRAWER ──────────────────────────────────── -->
+<div
+  id="mob-menu"
+  class="md:hidden fixed inset-x-0 top-14 z-40 hidden glass px-5 py-4 flex-col gap-1"
+>
+  {links.map((l) => (
+    <a
+      href={l.href}
+      class="mob-link py-3 text-sm font-medium transition-colors"
+      style="color: var(--on-surface-variant); border-bottom: 1px solid var(--outline-v);"
+    >
+      {l.label}
+    </a>
+  ))}
+  <a href="#contacto" class="btn-primary mt-3 justify-center mob-link">Hablemos</a>
+</div>
 
+<script>
+  // Mobile header scroll effect
+  const mhdr = document.getElementById('mobile-header')!;
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
-      nav.style.background = '#0b0b0f';
-      nav.style.borderBottom = '1px solid #242429';
+      mhdr.style.background = 'rgba(42,51,47,0.85)';
+      mhdr.style.backdropFilter = 'blur(16px)';
     } else {
-      nav.style.background = 'transparent';
-      nav.style.borderBottom = 'none';
+      mhdr.style.background = 'transparent';
+      mhdr.style.backdropFilter = 'none';
     }
   }, { passive: true });
 
+  // Dock link active highlight
+  const dockLinks = document.querySelectorAll<HTMLElement>('.dock-link');
+  const sections = ['sobre-mi','proyectos','skills','contacto'].map((id) => document.getElementById(id));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        dockLinks.forEach((l) => {
+          const active = l.getAttribute('href') === `#${id}`;
+          l.style.color = active ? 'var(--primary)' : 'var(--on-surface-variant)';
+          l.style.background = active ? 'rgba(105,246,184,0.1)' : 'transparent';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach((s) => s && io.observe(s));
+
+  // Mobile toggle
+  const toggle = document.getElementById('mob-toggle')!;
+  const menu   = document.getElementById('mob-menu')!;
+  const iOpen  = document.getElementById('mob-open')!;
+  const iClose = document.getElementById('mob-close')!;
   toggle.addEventListener('click', () => {
     const hidden = menu.classList.toggle('hidden');
-    open.classList.toggle('hidden', !hidden);
-    close.classList.toggle('hidden', hidden);
+    menu.classList.toggle('flex', !hidden);
+    iOpen.classList.toggle('hidden', !hidden);
+    iClose.classList.toggle('hidden', hidden);
   });
-
-  document.querySelectorAll('.mobile-link').forEach((l) =>
+  document.querySelectorAll('.mob-link').forEach((l) =>
     l.addEventListener('click', () => {
       menu.classList.add('hidden');
-      open.classList.remove('hidden');
-      close.classList.add('hidden');
+      menu.classList.remove('flex');
+      iOpen.classList.remove('hidden');
+      iClose.classList.add('hidden');
     })
   );
 </script>
